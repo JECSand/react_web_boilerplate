@@ -70,7 +70,7 @@ function register(user) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(user)
     };
-    return fetch(`${config.apiUrl}/signup`, requestOptions).then(handleResponse);
+    return fetch(`${config.apiUrl}/auth/register`, requestOptions).then(handleResponse);
 }
 
 // Service function that sends a Patch request to the API backend to update an existing user
