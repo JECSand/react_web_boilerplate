@@ -7,8 +7,9 @@ React.js Web Client Boilerplate
 
 import config from 'config';
 import { authHeader } from '../helpers';
+import { handleResponse, handleLogInResponse, handleLogOutResponse } from '../utility_functions';
 
-// Export Users Services Functions
+// Export Users Service Functions
 export const userService = {
     login,
     logout,
@@ -90,58 +91,4 @@ function _delete(id) {
         headers: authHeader()
     };
     return fetch(`${config.apiUrl}/users/${id}`, requestOptions).then(handleResponse);
-}
-
-/*
-TODO(Connor) Abstract the following 3 functions and eliminate the redundant code
-*/
-
-// Handler function for regular requests
-function handleResponse(response) {
-    console.log(response);
-    return response.text().then(text => {
-        const data = text && JSON.parse(text);
-        if (!response.ok) {
-            if (response.status === 401) {
-                logout();
-                location.reload(true);
-            }
-            const error = (data && data.message) || response.statusText;
-            return Promise.reject(error);
-        }
-        return data;
-    });
-}
-
-// Handler function for login requests
-function handleLogInResponse(response) {
-    return response.text().then(text => {
-        const data = text && JSON.parse(text);
-        if (!response.ok) {
-            if (response.status === 401) {
-                logout();
-                location.reload(true);
-            }
-
-            const error = (data && data.message) || response.statusText;
-            return Promise.reject(error);
-        }
-        let authToken = JSON.stringify(response.headers.get('Auth-Token'));
-        localStorage.setItem('auth', authToken);
-        return data;
-    });
-}
-
-// Handler function for logout requests
-function handleLogOutResponse(response) {
-    return response.text().then(text => {
-        const data = text && JSON.parse(text);
-        if (!response.ok) {
-            const error = (data && data.message) || response.statusText;
-            return Promise.reject(error);
-        }
-        localStorage.removeItem('user');
-        localStorage.removeItem('auth');
-        return data;
-    });
 }

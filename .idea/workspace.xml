@@ -2,13 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="40f3a806-5055-4d88-9f09-8911ab508f05" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/pages/AdminPage.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/actions/group.actions.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/page_components/AdminTable.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/constants/group.constants.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/reducers/groups.reducer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/group.service.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utility_functions/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utility_functions/services.utilities.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App/App.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/PrivateRoute.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/route_components/PrivateRoute.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/actions/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/HomePage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/HomePage.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/constants/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/AdminPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/AdminPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reducers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/user.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/user.service.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -94,7 +103,8 @@
       <option name="presentableId" value="Default" />
       <updated>1567819339206</updated>
       <workItem from="1567819342269" duration="8394000" />
-      <workItem from="1567916104114" duration="6222000" />
+      <workItem from="1567916104114" duration="7647000" />
+      <workItem from="1567966129173" duration="8444000" />
     </task>
     <servers />
   </component>
@@ -106,7 +116,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

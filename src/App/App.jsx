@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 
 import { history } from '../helpers';
 import { alertActions } from '../actions';
-import { PrivateRoute, MasterAdminPrivateRoute } from '../components';
+import { PrivateRoute } from '../components';
 import { HomePage } from '../pages/HomePage';
 import { LoginPage } from '../pages/LoginPage';
 import { RegisterPage } from '../pages/RegisterPage';

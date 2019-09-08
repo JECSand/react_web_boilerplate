@@ -8,7 +8,8 @@ React.js Web Client Boilerplate
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { userActions } from '../actions';
+import { userActions, groupActions } from '../actions';
+import { AdminTable } from '../components';
 
 
 // Define & Render the App's AdminPage Component
@@ -17,36 +18,20 @@ class AdminPage extends React.Component {
     // Get a list of all users from backend once the component mounts via a dispatch action
     componentDidMount() {
         this.props.dispatch(userActions.getAll());
-    }
-
-    // Handler that dispatches a user delete action to the backend
-    handleDeleteUser(id) {
-        return (e) => this.props.dispatch(userActions.delete(id));
+        if (this.props.user.role === "master_admin") {
+            this.props.dispatch(groupActions.getAll());
+        }
     }
 
     // Render AdminPage Component
     render() {
-        const { user, users } = this.props;
         return (
             <div className="col-md-6 col-md-offset-3">
-                <h1>Hi {user.username}!</h1>
+                <h1>Hi { this.props.user.username }!</h1>
                 <p>You're logged in with React!!</p>
-                <h3>All registered users:</h3>
-                {users.loading && <em>Loading users...</em>}
-                {users.error && <span className="text-danger">ERROR: {users.error}</span>}
-                {users.items &&
-                <ul>
-                    {users.items.map((user, index) =>
-                        <li key={user.uuid}>
-                            {user.uuid + ' - ' + user.username}
-                            {
-                                user.deleting ? <em> - Deleting...</em>
-                                    : user.deleteError ? <span className="text-danger"> - ERROR: {user.deleteError}</span>
-                                    : <span> - <a onClick={this.handleDeleteUser(user.uuid)}>Delete</a></span>
-                            }
-                        </li>
-                    )}
-                </ul>
+                <AdminTable objects={ this.props.users } tableType={ "users" } dispatch={ this.props.dispatch } />
+                {(this.props.user.role === "master_admin") &&
+                  <AdminTable objects={ this.props.groups } tableType={ "groups" } dispatch={ this.props.dispatch } />
                 }
                 <p>
                     <Link to="/">Home Page</Link>
@@ -57,11 +42,12 @@ class AdminPage extends React.Component {
 }
 
 function mapStateToProps(state) {
-    const { users, authentication } = state;
+    const { users, groups, authentication } = state;
     const { user } = authentication;
     return {
         user,
-        users
+        users,
+        groups
     };
 }
 
