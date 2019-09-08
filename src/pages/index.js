@@ -8,3 +8,4 @@ React.js Web Client Boilerplate
 export * from './LoginPage';
 export * from './HomePage';
 export * from './RegisterPage';
+export * from './AdminPage';

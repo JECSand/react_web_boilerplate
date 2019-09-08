@@ -5,4 +5,4 @@ React.js Web Client Boilerplate
 9/01/2019
 */
 
-export * from './PrivateRoute';
+export * from './route_components/PrivateRoute';

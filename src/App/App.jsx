@@ -11,10 +11,11 @@ import { connect } from 'react-redux';
 
 import { history } from '../helpers';
 import { alertActions } from '../actions';
-import { PrivateRoute } from '../components';
+import { PrivateRoute, MasterAdminPrivateRoute } from '../components';
 import { HomePage } from '../pages/HomePage';
 import { LoginPage } from '../pages/LoginPage';
 import { RegisterPage } from '../pages/RegisterPage';
+import { AdminPage } from '../pages/AdminPage';
 
 class App extends React.Component {
     constructor(props) {
@@ -41,6 +42,7 @@ class App extends React.Component {
                                 <PrivateRoute exact path="/" component={HomePage} />
                                 <Route path="/login" component={LoginPage} />
                                 <Route path="/register" component={RegisterPage} />
+                                <PrivateRoute exact path="/admin" component={AdminPage} />
                             </div>
                         </Router>
                     </div>
