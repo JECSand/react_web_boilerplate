@@ -5,11 +5,16 @@ React.js Web Client Boilerplate
 9/02/2019
 */
 
-import { groupConstants } from '../constants';
+import {groupConstants } from '../constants';
 
 // Export groups reducers
 export function groups(state = {}, action) {
     switch (action.type) {
+        case groupConstants.CREATE_SUCCESS:
+            return {
+                ...state,
+                items: state.items.concat(action.group)
+            };
         case groupConstants.GETALL_REQUEST:
             return {
                 loading: true

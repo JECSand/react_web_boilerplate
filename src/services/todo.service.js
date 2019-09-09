@@ -12,12 +12,23 @@ import {handleResponse} from '../utility_functions';
 
 // Export Todos Service Functions
 export const todoService = {
+    create,
     getAll,
     getById,
     update,
     delete: _delete
 };
 
+
+// Service function that sends a post request to the API backend to create a new todos
+function create(todo) {
+    const requestOptions = {
+        method: 'POST',
+        headers: { ...authHeader(), 'Content-Type': 'application/json' },
+        body: JSON.stringify(todo)
+    };
+    return fetch(`${config.apiUrl}/todos`, requestOptions).then(handleResponse);
+}
 
 // Service function that retrieves an array of all todos from API backend
 function getAll() {

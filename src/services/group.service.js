@@ -12,11 +12,23 @@ import {handleResponse} from '../utility_functions';
 
 // Export Group Service Functions
 export const groupService = {
+    create,
     getAll,
     getById,
     update,
     delete: _delete
 };
+
+
+// Service function that sends a post request to the API backend to create a new group
+function create(group) {
+    const requestOptions = {
+        method: 'POST',
+        headers: { ...authHeader(), 'Content-Type': 'application/json' },
+        body: JSON.stringify(group)
+    };
+    return fetch(`${config.apiUrl}/groups`, requestOptions).then(handleResponse);
+}
 
 
 // Service function that retrieves an array of all groups from API backend

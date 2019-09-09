@@ -8,6 +8,11 @@ React.js Web Client Boilerplate
 // Export Group Constants
 export const groupConstants = {
 
+    // Group Create Constants
+    CREATE_REQUEST: 'GROUPS_CREATE_REQUEST',
+    CREATE_SUCCESS: 'GROUPS_CREATE_SUCCESS',
+    CREATE_FAILURE: 'GROUPS_CREATE_FAILURE',
+
     // Group Get Constants
     GETALL_REQUEST: 'GROUPS_GETALL_REQUEST',
     GETALL_SUCCESS: 'GROUPS_GETALL_SUCCESS',

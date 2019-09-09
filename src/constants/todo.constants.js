@@ -8,6 +8,11 @@ React.js Web Client Boilerplate
 // Export Todos Constants
 export const todoConstants = {
 
+    // Todos Create Constants
+    CREATE_REQUEST: 'TODOS_CREATE_REQUEST',
+    CREATE_SUCCESS: 'TODOS_CREATE_SUCCESS',
+    CREATE_FAILURE: 'TODOS_CREATE_FAILURE',
+
     // Todos Get Constants
     GETALL_REQUEST: 'TODOS_GETALL_REQUEST',
     GETALL_SUCCESS: 'TODOS_GETALL_SUCCESS',

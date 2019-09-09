@@ -7,11 +7,33 @@ React.js Web Client Boilerplate
 
 import { todoConstants } from '../constants';
 import { todoService } from '../services';
+import { alertActions } from "./alert.actions";
 
 export const todoActions = {
+    create,
     getAll,
     delete: _delete
 };
+
+function create(todo) {
+    return dispatch => {
+        dispatch(request(todo));
+        todoService.create(todo)
+            .then(
+                todo => {
+                    dispatch(success(todo));
+                    dispatch(alertActions.success('Group successfully created'));
+                },
+                error => {
+                    dispatch(failure(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
+                }
+            );
+    };
+    function request(todo) { return { type: todoConstants.CREATE_REQUEST, todo } }
+    function success(todo) { return { type: todoConstants.CREATE_SUCCESS, todo } }
+    function failure(error) { return { type: todoConstants.CREATE_FAILURE, error } }
+}
 
 function getAll() {
     return dispatch => {

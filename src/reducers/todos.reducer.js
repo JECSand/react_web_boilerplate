@@ -5,18 +5,23 @@ React.js Web Client Boilerplate
 9/02/2019
 */
 
-import { todoConstants } from '../constants';
+import {todoConstants } from '../constants';
 
 // Export groups reducers
 export function todos(state = {}, action) {
     switch (action.type) {
+        case todoConstants.CREATE_SUCCESS:
+            return {
+                ...state,
+                items: state.items.concat(action.todo)
+            };
         case todoConstants.GETALL_REQUEST:
             return {
                 loading: true
             };
         case todoConstants.GETALL_SUCCESS:
             return {
-                items: action.groups
+                items: action.todos
             };
         case todoConstants.GETALL_FAILURE:
             return {

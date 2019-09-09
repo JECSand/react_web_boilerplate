@@ -5,13 +5,35 @@ React.js Web Client Boilerplate
 9/06/2019
 */
 
-import { groupConstants } from '../constants';
-import { groupService } from '../services';
+import {groupConstants } from '../constants';
+import {groupService } from '../services';
+import {alertActions} from "./alert.actions";
 
 export const groupActions = {
+    create,
     getAll,
     delete: _delete
 };
+
+function create(group) {
+    return dispatch => {
+        dispatch(request(group));
+        groupService.create(group)
+            .then(
+                group => {
+                    dispatch(success(group));
+                    dispatch(alertActions.success('Group successfully created'));
+                },
+                error => {
+                    dispatch(failure(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
+                }
+            );
+    };
+    function request(group) { return { type: groupConstants.CREATE_REQUEST, group } }
+    function success(group) { return { type: groupConstants.CREATE_SUCCESS, group } }
+    function failure(error) { return { type: groupConstants.CREATE_FAILURE, error } }
+}
 
 function getAll() {
     return dispatch => {

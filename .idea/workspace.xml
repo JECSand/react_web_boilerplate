@@ -2,7 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="40f3a806-5055-4d88-9f09-8911ab508f05" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/components/modal_components/AdminUserModal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/modal_components/AdminUserModal.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/modal_components/AdminGroupModal.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/modal_components/AdminTodoModal.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/actions/group.actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/group.actions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/actions/todo.actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/todo.actions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/page_components/AdminTable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page_components/AdminTable.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/constants/group.constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/group.constants.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/constants/todo.constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/todo.constants.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reducers/groups.reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/groups.reducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reducers/todos.reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/todos.reducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/group.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/group.service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/todo.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/todo.service.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -93,7 +104,7 @@
       <updated>1567819339206</updated>
       <workItem from="1567819342269" duration="8394000" />
       <workItem from="1567916104114" duration="7647000" />
-      <workItem from="1567966129173" duration="36169000" />
+      <workItem from="1567966129173" duration="39937000" />
     </task>
     <servers />
   </component>
