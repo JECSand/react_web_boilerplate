@@ -10,6 +10,7 @@ import { authentication } from './authentication.reducer';
 import { registration } from './registration.reducer';
 import { users } from './users.reducer';
 import { groups } from './groups.reducer';
+import { todos } from './todos.reducer';
 import { alert } from './alert.reducer';
 
 // Combine all of the defined reducers into the root reducer
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   registration,
   users,
   groups,
+  todos,
   alert
 });
 

@@ -6,4 +6,5 @@ React.js Web Client Boilerplate
 */
 
 export * from './route_components/PrivateRoute';
+export * from './page_components/NavBar';
 export * from './page_components/AdminTable';

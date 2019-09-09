@@ -8,10 +8,9 @@ React.js Web Client Boilerplate
 import React from 'react';
 import { Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-
 import { history } from '../helpers';
 import { alertActions } from '../actions';
-import { PrivateRoute } from '../components';
+import { PrivateRoute, NavBar } from '../components';
 import { HomePage } from '../pages/HomePage';
 import { LoginPage } from '../pages/LoginPage';
 import { RegisterPage } from '../pages/RegisterPage';
@@ -33,6 +32,7 @@ class App extends React.Component {
         return (
             <div className="jumbotron">
                 <div className="container">
+                    <NavBar path={ location.pathname } />
                     <div className="col-sm-8 col-sm-offset-2">
                         {alert.message &&
                             <div className={`alert ${alert.type}`}>{alert.message}</div>

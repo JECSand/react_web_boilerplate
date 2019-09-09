@@ -5,7 +5,7 @@ React.js Web Client Boilerplate
 9/01/2019
 */
 
-// Export User Constants
+// Export Group Constants
 export const groupConstants = {
 
     // Group Get Constants

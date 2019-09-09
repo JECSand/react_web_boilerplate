@@ -6,7 +6,6 @@ React.js Web Client Boilerplate
 */
 
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 
@@ -17,18 +16,12 @@ class HomePage extends React.Component {
     render() {
         const { user } = this.props;
         return (
-            <div className="col-md-6 col-md-offset-3">
-                <h1>Hi {user.username}!</h1>
-                <p>You're logged in with React!!</p>
-
-                <p>
-                    <Link to="/login">Logout</Link>
-                </p>
-                {(user.role === "master_admin" || user.role === "group_admin") &&
-                  <p>
-                      <Link to="/admin">Admin Page</Link>
-                  </p>
-                }
+            <div>
+                <h1>Home</h1>
+                <div className="col-md-6 col-md-offset-3">
+                    <h1>Welcome Back, {user.firstname}!</h1>
+                    <p>You're logged in with React!!</p>
+                </div>
             </div>
         );
     }

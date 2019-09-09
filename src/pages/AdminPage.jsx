@@ -8,7 +8,7 @@ React.js Web Client Boilerplate
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { userActions, groupActions } from '../actions';
+import { userActions, groupActions, todoActions } from '../actions';
 import { AdminTable } from '../components';
 
 
@@ -18,6 +18,7 @@ class AdminPage extends React.Component {
     // Get a list of all users from backend once the component mounts via a dispatch action
     componentDidMount() {
         this.props.dispatch(userActions.getAll());
+        this.props.dispatch(todoActions.getAll());
         if (this.props.user.role === "master_admin") {
             this.props.dispatch(groupActions.getAll());
         }
@@ -26,28 +27,32 @@ class AdminPage extends React.Component {
     // Render AdminPage Component
     render() {
         return (
-            <div className="col-md-6 col-md-offset-3">
-                <h1>Hi { this.props.user.username }!</h1>
-                <p>You're logged in with React!!</p>
-                <AdminTable objects={ this.props.users } tableType={ "users" } dispatch={ this.props.dispatch } />
-                {(this.props.user.role === "master_admin") &&
-                  <AdminTable objects={ this.props.groups } tableType={ "groups" } dispatch={ this.props.dispatch } />
-                }
-                <p>
-                    <Link to="/">Home Page</Link>
-                </p>
+            <div>
+                <h1>Admin Management Panel</h1>
+                <div className="row">
+                    <AdminTable objects={ this.props.users } tableType={ "users" } dispatch={ this.props.dispatch } />
+                </div>
+                    {(this.props.user.role === "master_admin") &&
+                    <div className="row">
+                    <AdminTable objects={ this.props.groups } tableType={ "groups" } dispatch={ this.props.dispatch } />
+                    </div>
+                    }
+                <div className="row">
+                    <AdminTable objects={ this.props.todos } tableType={ "todos" } dispatch={ this.props.dispatch } />
+                </div>
             </div>
         );
     }
 }
 
 function mapStateToProps(state) {
-    const { users, groups, authentication } = state;
+    const { users, groups, todos, authentication } = state;
     const { user } = authentication;
     return {
         user,
         users,
-        groups
+        groups,
+        todos
     };
 }
 

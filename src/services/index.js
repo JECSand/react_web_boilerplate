@@ -7,3 +7,4 @@ React.js Web Client Boilerplate
 
 export * from './user.service';
 export * from './group.service';
+export * from './todo.service';

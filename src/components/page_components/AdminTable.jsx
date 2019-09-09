@@ -6,7 +6,7 @@ React.js Web Client Boilerplate
 */
 
 import React from 'react';
-import { userActions, groupActions } from "../../actions";
+import { userActions, groupActions, todoActions } from "../../actions";
 
 
 export class AdminTable extends React.Component {
@@ -17,19 +17,19 @@ export class AdminTable extends React.Component {
             return (e) => this.props.dispatch(userActions.delete(id));
         } else if (this.props.tableType === "groups") {
             return (e) => this.props.dispatch(groupActions.delete(id));
+        } else if (this.props.tableType === "todos") {
+            return (e) => this.props.dispatch(todoActions.delete(id));
         }
     }
 
     render() {
-        let objectName = "";
+        let objectName = "name";
         if (this.props.tableType === "users") {
             objectName = "username";
-        } else if (this.props.tableType === "groups") {
-            objectName = "name";
         }
         return (
             <div>
-                <h3>All registered { this.props.tableType }:</h3>
+                <h3>{ this.props.tableType } Manager:</h3>
                 {this.props.objects.loading && <em>Loading { this.props.tableType } ...</em>}
                 {this.props.objects.error && <span className="text-danger">ERROR: {this.props.objects.error}</span>}
                 {this.props.objects.items &&
