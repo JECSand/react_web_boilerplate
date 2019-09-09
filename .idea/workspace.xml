@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="40f3a806-5055-4d88-9f09-8911ab508f05" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/modal_components/AdminUserModal.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/user.actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/user.actions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/page_components/AdminTable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page_components/AdminTable.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/constants/user.constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/user.constants.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/AdminPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/AdminPage.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/users.reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/users.reducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/user.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/user.service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/modal_components/AdminUserModal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/modal_components/AdminUserModal.jsx" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -100,7 +93,7 @@
       <updated>1567819339206</updated>
       <workItem from="1567819342269" duration="8394000" />
       <workItem from="1567916104114" duration="7647000" />
-      <workItem from="1567966129173" duration="36107000" />
+      <workItem from="1567966129173" duration="36169000" />
     </task>
     <servers />
   </component>
