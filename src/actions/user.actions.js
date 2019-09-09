@@ -15,6 +15,7 @@ export const userActions = {
     logout,
     register,
     getAll,
+    create,
     delete: _delete
 };
 
@@ -63,6 +64,26 @@ function register(user) {
     function request(user) { return { type: userConstants.REGISTER_REQUEST, user } }
     function success(user) { return { type: userConstants.REGISTER_SUCCESS, user } }
     function failure(error) { return { type: userConstants.REGISTER_FAILURE, error } }
+}
+
+function create(user) {
+    return dispatch => {
+        dispatch(request(user));
+        userService.create(user)
+            .then(
+                user => {
+                    dispatch(success(user));
+                    dispatch(alertActions.success('User successfully created'));
+                },
+                error => {
+                    dispatch(failure(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
+                }
+            );
+    };
+    function request(user) { return { type: userConstants.CREATE_REQUEST, user } }
+    function success(user) { return { type: userConstants.CREATE_SUCCESS, user } }
+    function failure(error) { return { type: userConstants.CREATE_FAILURE, error } }
 }
 
 function getAll() {

@@ -6,7 +6,8 @@ React.js Web Client Boilerplate
 */
 
 import React from 'react';
-import { userActions, groupActions, todoActions } from "../../actions";
+import { userActions, groupActions, todoActions } from '../../actions';
+import { AdminUserModal } from '../modal_components/AdminUserModal';
 
 
 export class AdminTable extends React.Component {
@@ -45,6 +46,9 @@ export class AdminTable extends React.Component {
                         </li>
                     )}
                 </ul>
+                }
+                {(this.props.tableType === "users") &&
+                <AdminUserModal role={ this.props.role } dispatch={ this.props.dispatch } />
                 }
             </div>
         );

@@ -6,7 +6,6 @@ React.js Web Client Boilerplate
 */
 
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { userActions, groupActions, todoActions } from '../actions';
 import { AdminTable } from '../components';
@@ -30,7 +29,7 @@ class AdminPage extends React.Component {
             <div>
                 <h1>Admin Management Panel</h1>
                 <div className="row">
-                    <AdminTable objects={ this.props.users } tableType={ "users" } dispatch={ this.props.dispatch } />
+                    <AdminTable objects={ this.props.users } tableType={ "users" } role={ this.props.user.role } dispatch={ this.props.dispatch } />
                 </div>
                     {(this.props.user.role === "master_admin") &&
                     <div className="row">

@@ -37,6 +37,11 @@ export function users(state = {}, action) {
       return {
         items: state.items.filter(user => user.uuid !== action.id)
       };
+    case userConstants.CREATE_SUCCESS:
+      return {
+        ...state,
+        items: state.items.concat(action.user)
+      };
     case userConstants.DELETE_FAILURE:
       // Remove 'deleting:true' property and add 'deleteError:[error]' property to user
       return {

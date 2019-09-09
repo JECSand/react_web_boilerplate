@@ -14,6 +14,7 @@ export const userService = {
     login,
     logout,
     register,
+    create,
     getAll,
     getById,
     update,
@@ -72,6 +73,16 @@ function register(user) {
         body: JSON.stringify(user)
     };
     return fetch(`${config.apiUrl}/auth/register`, requestOptions).then(handleResponse);
+}
+
+// Service function that sends a post request to the API backend to create a new user
+function create(user) {
+    const requestOptions = {
+        method: 'POST',
+        headers: { ...authHeader(), 'Content-Type': 'application/json' },
+        body: JSON.stringify(user)
+    };
+    return fetch(`${config.apiUrl}/users`, requestOptions).then(handleResponse);
 }
 
 // Service function that sends a Patch request to the API backend to update an existing user
