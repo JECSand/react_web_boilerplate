@@ -16,10 +16,12 @@ export class AdminGroupModal extends React.Component {
         super(props);
         if (this.props.object) {
             this.modalType = 'Modify';
+            this.btnColor = 'secondary';
             this.state = {modal: false, name: this.props.object.name, uuid: this.props.object.uuid};
         } else {
             this.state = {modal: false, name: ''};
             this.modalType = 'Create';
+            this.btnColor = 'primary';
         }
         this.toggle = this.toggle.bind(this);
         this.handleChangeName = this.handleChangeName.bind(this);
@@ -52,7 +54,7 @@ export class AdminGroupModal extends React.Component {
     render() {
         return (
             <div>
-                <Button color="success" onClick={this.toggle}>{ this.modalType } Group</Button>
+                <Button color={ this.btnColor } onClick={this.toggle}>{ this.modalType } Group</Button>
                 <Modal isOpen={this.state.modal}>
                     <form onSubmit={this.handleSubmit}>
                         <ModalHeader>{ this.modalType } Group</ModalHeader>

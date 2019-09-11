@@ -8,7 +8,7 @@ React.js Web Client Boilerplate
 import React from 'react';
 import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import {groupActions, userActions} from "../../actions";
+import { userActions} from "../../actions";
 
 
 class AdminUserModal extends React.Component {
@@ -17,10 +17,12 @@ class AdminUserModal extends React.Component {
         super(props);
         if (this.props.object) {
             this.modalType = 'Modify';
+            this.btnColor = 'secondary';
             this.state = {modal: false, username: this.props.object.username, password: '', uuid: this.props.object.uuid,
                     firstname: this.props.object.firstname, lastname: this.props.object.lastname,
                     email: this.props.object.email, groupuuid: this.props.object.groupuuid, role: this.props.object.role};
         } else {
+            this.btnColor = 'primary';
             this.modalType = 'Create';
             this.state = { modal: false, email: '', username: '' , password: '',
                 firstname: '', lastname: '', groupuuid: '', role: 'member'};
@@ -91,7 +93,7 @@ class AdminUserModal extends React.Component {
     render() {
         return (
             <div>
-                <Button color="success" onClick={this.toggle}>{ this.modalType } User</Button>
+                <Button color={ this.btnColor } onClick={this.toggle}>{ this.modalType } User</Button>
                 <Modal isOpen={this.state.modal}>
                     <form onSubmit={this.handleSubmit}>
                         <ModalHeader>{ this.modalType } User</ModalHeader>

@@ -16,10 +16,12 @@ export class AdminTodoModal extends React.Component {
         super(props);
         if (this.props.object) {
             this.modalType = 'Modify';
+            this.btnColor = 'secondary';
             this.state = { modal: false, name: this.props.object.name, due: this.props.object.due, uuid: this.props.object.uuid, description: this.props.object.description};
         } else {
             this.state = { modal: false, name: '', due: '' , description: ''};
             this.modalType = 'Create';
+            this.btnColor = 'primary';
         }
         this.toggle = this.toggle.bind(this);
         this.handleChangeName = this.handleChangeName.bind(this);
@@ -62,7 +64,7 @@ export class AdminTodoModal extends React.Component {
     render() {
         return (
             <div>
-                <Button color="success" onClick={this.toggle}>{ this.modalType } Todo</Button>
+                <Button color={ this.btnColor } onClick={this.toggle}>{ this.modalType } Todo</Button>
                 <Modal isOpen={this.state.modal}>
                     <form onSubmit={this.handleSubmit}>
                         <ModalHeader>{ this.modalType } Todo</ModalHeader>

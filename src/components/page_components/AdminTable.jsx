@@ -6,6 +6,7 @@ React.js Web Client Boilerplate
 */
 
 import React from 'react';
+import { Button, Collapse, Card, CardBody } from 'reactstrap';
 import { userActions, groupActions, todoActions } from '../../actions';
 import { AdminUserModal } from '../modal_components/AdminUserModal';
 import { AdminGroupModal } from '../modal_components/AdminGroupModal';
@@ -13,6 +14,12 @@ import { AdminTodoModal } from '../modal_components/AdminTodoModal';
 
 
 export class AdminTable extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.toggle = this.toggle.bind(this);
+        this.state = { collapse: false };
+    }
 
     // Handler that dispatches a user delete action to the backend
     handleDelete(id) {
@@ -25,6 +32,10 @@ export class AdminTable extends React.Component {
         }
     }
 
+    toggle() {
+        this.setState(state => ({ collapse: !state.collapse }));
+    }
+
     render() {
         let objectName = "name";
         if (this.props.tableType === "users") {
@@ -33,18 +44,18 @@ export class AdminTable extends React.Component {
         return (
             <div>
                 <h3>{ this.props.tableType } Manager:</h3>
+                <Button color="primary" onClick={this.toggle} style={{ marginBottom: '1rem' }}>Show { this.props.tableType }</Button>
                 {this.props.objects.loading && <em>Loading { this.props.tableType } ...</em>}
                 {this.props.objects.error && <span className="text-danger">ERROR: {this.props.objects.error}</span>}
+                <Collapse isOpen={this.state.collapse}>
+                    <Card>
+                        <CardBody>
                 {this.props.objects.items &&
                 <ul>
                     {this.props.objects.items.map((object, index) =>
                         <li key={object.uuid}>
                             {object.uuid + ' - ' + object[objectName]}
-                            {
-                                object.deleting ? <em> - Deleting...</em>
-                                    : object.deleteError ? <span className="text-danger"> - ERROR: {object.deleteError}</span>
-                                    : <span> - <a onClick={this.handleDelete(object.uuid)}>Delete</a></span>
-                            }
+                            <div>
                             {(this.props.tableType === "users") &&
                             <AdminUserModal role={ this.props.role } object={ object } dispatch={ this.props.dispatch } />
                             }
@@ -54,6 +65,12 @@ export class AdminTable extends React.Component {
                             {(this.props.tableType === "todos") &&
                             <AdminTodoModal dispatch={ this.props.dispatch } object={ object } />
                             }
+                            {
+                                object.deleting ? <em> - Deleting...</em>
+                                    : object.deleteError ? <span className="text-danger"> - ERROR: {object.deleteError}</span>
+                                    : <Button color="danger" onClick={this.handleDelete(object.uuid)}>Delete</Button>
+                            }
+                            </div>
                         </li>
                     )}
                 </ul>
@@ -67,6 +84,9 @@ export class AdminTable extends React.Component {
                 {(this.props.tableType === "todos") &&
                 <AdminTodoModal dispatch={ this.props.dispatch } object={ null } />
                 }
+                </CardBody>
+                </Card>
+                </Collapse>
             </div>
         );
     }

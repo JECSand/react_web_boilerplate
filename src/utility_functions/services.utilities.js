@@ -8,6 +8,7 @@ React.js Web Client Boilerplate
 /*
 TODO(Connor) Abstract the following 3 functions and eliminate the redundant code
 */
+import { userService } from '../services';
 
 // Handler function for regular requests
 export function handleResponse(response) {
@@ -15,7 +16,7 @@ export function handleResponse(response) {
         const data = text && JSON.parse(text);
         if (!response.ok) {
             if (response.status === 401) {
-                logout();
+                userService.logout();
                 location.reload(true);
             }
             const error = (data && data.message) || response.statusText;

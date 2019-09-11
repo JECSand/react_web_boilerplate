@@ -51,7 +51,7 @@ export class NavBar extends React.Component {
                                     <NavLink href="/">Home</NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink href="/">Todos</NavLink>
+                                    <NavLink href="/todos">Todos</NavLink>
                                 </NavItem>
                                 {(curUser.role === "master_admin" || curUser.role === "group_admin") &&
                                     <NavItem>
