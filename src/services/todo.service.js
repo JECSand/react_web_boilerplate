@@ -51,13 +51,13 @@ function getById(id) {
 
 
 // Service function that sends a Patch request to the API backend to update an existing todos
-function update(group) {
+function update(todo) {
     const requestOptions = {
         method: 'PATCH',
         headers: { ...authHeader(), 'Content-Type': 'application/json' },
-        body: JSON.stringify(group)
+        body: JSON.stringify(todo)
     };
-    return fetch(`${config.apiUrl}/todos/${group.id}`, requestOptions).then(handleResponse);
+    return fetch(`${config.apiUrl}/todos/${todo.uuid}`, requestOptions).then(handleResponse);
 }
 
 

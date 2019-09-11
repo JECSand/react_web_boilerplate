@@ -5,7 +5,7 @@ React.js Web Client Boilerplate
 9/02/2019
 */
 
-import {groupConstants } from '../constants';
+import { groupConstants } from '../constants';
 
 // Export groups reducers
 export function groups(state = {}, action) {
@@ -14,6 +14,15 @@ export function groups(state = {}, action) {
             return {
                 ...state,
                 items: state.items.concat(action.group)
+            };
+        case groupConstants.MODIFY_SUCCESS:
+            return {
+                ...state,
+                items: state.items.map(group =>
+                    group.uuid === action.group.uuid
+                        ? { ...group, name: action.group.name }
+                        : group
+                )
             };
         case groupConstants.GETALL_REQUEST:
             return {

@@ -5,12 +5,13 @@ React.js Web Client Boilerplate
 9/06/2019
 */
 
-import {groupConstants } from '../constants';
-import {groupService } from '../services';
+import { groupConstants } from '../constants';
+import { groupService } from '../services';
 import {alertActions} from "./alert.actions";
 
 export const groupActions = {
     create,
+    modify,
     getAll,
     delete: _delete
 };
@@ -33,6 +34,26 @@ function create(group) {
     function request(group) { return { type: groupConstants.CREATE_REQUEST, group } }
     function success(group) { return { type: groupConstants.CREATE_SUCCESS, group } }
     function failure(error) { return { type: groupConstants.CREATE_FAILURE, error } }
+}
+
+function modify(group) {
+    return dispatch => {
+        dispatch(request(group));
+        groupService.update(group)
+            .then(
+                group => {
+                    dispatch(success(group));
+                    dispatch(alertActions.success('Group successfully modified'));
+                },
+                error => {
+                    dispatch(failure(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
+                }
+            );
+    };
+    function request(group) { return { type: groupConstants.MODIFY_REQUEST, group } }
+    function success(group) { return { type: groupConstants.MODIFY_SUCCESS, group } }
+    function failure(error) { return { type: groupConstants.MODIFY_FAILURE, error } }
 }
 
 function getAll() {

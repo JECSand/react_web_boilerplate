@@ -92,7 +92,7 @@ function update(user) {
         headers: { ...authHeader(), 'Content-Type': 'application/json' },
         body: JSON.stringify(user)
     };
-    return fetch(`${config.apiUrl}/users/${user.id}`, requestOptions).then(handleResponse);
+    return fetch(`${config.apiUrl}/users/${user.uuid}`, requestOptions).then(handleResponse);
 }
 
 // Service function that deletes a user by sending a Delete request to the API backend

@@ -15,8 +15,17 @@ class AdminUserModal extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { modal: false, email: '', username: '' , password: '',
-            firstname: '', lastname: '', groupuuid: '', role: 'member'};
+        if (this.props.object) {
+            this.modalType = 'Modify';
+            this.state = {modal: false, username: this.props.object.username, password: '', uuid: this.props.object.uuid,
+                    firstname: this.props.object.firstname, lastname: this.props.object.lastname,
+                    email: this.props.object.email, groupuuid: this.props.object.groupuuid, role: this.props.object.role};
+        } else {
+            this.modalType = 'Create';
+            this.state = { modal: false, email: '', username: '' , password: '',
+                firstname: '', lastname: '', groupuuid: '', role: 'member'};
+        }
+
         this.roleData = [
             { value: 'member', name: 'Member' },
             { value: 'group_admin', name: 'Admin' }
@@ -30,13 +39,6 @@ class AdminUserModal extends React.Component {
         this.handleChangeGroupuuid= this.handleChangeGroupuuid.bind(this);
         this.handleChangeRole= this.handleChangeRole.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-    }
-
-    // Get a list of all users from backend once the component mounts via a dispatch action
-    componentDidMount() {
-        if (this.props.role=== "master_admin") {
-            this.props.dispatch(groupActions.getAll());
-        }
     }
 
     toggle() {
@@ -79,16 +81,20 @@ class AdminUserModal extends React.Component {
             "role": this.state.role
         };
         this.toggle();
+        if (this.props.object) {
+            newUser['uuid'] = this.state.uuid;
+            return this.props.dispatch(userActions.modify(newUser));
+        }
         return this.props.dispatch(userActions.create(newUser));
     }
 
     render() {
         return (
             <div>
-                <Button color="success" onClick={this.toggle}>Create User</Button>
+                <Button color="success" onClick={this.toggle}>{ this.modalType } User</Button>
                 <Modal isOpen={this.state.modal}>
                     <form onSubmit={this.handleSubmit}>
-                        <ModalHeader>Create User</ModalHeader>
+                        <ModalHeader>{ this.modalType } User</ModalHeader>
                         <ModalBody>
                             <div className="row">
                                 <div className="form-group col-md-4">

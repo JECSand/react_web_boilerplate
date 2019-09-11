@@ -42,6 +42,17 @@ export function users(state = {}, action) {
         ...state,
         items: state.items.concat(action.user)
       };
+    case userConstants.MODIFY_SUCCESS:
+      return {
+        ...state,
+        items: state.items.map(user =>
+            user.uuid === action.user.uuid
+                ? { ...user, username: action.user.username, firstname: action.user.firstname,
+                  lastname: action.user.lastname, email: action.user.email, groupuuid:
+                  action.user.groupuuid, role: action.user.groupuuid }
+                : user
+        )
+      };
     case userConstants.DELETE_FAILURE:
       // Remove 'deleting:true' property and add 'deleteError:[error]' property to user
       return {

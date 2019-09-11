@@ -30,7 +30,6 @@ function create(group) {
     return fetch(`${config.apiUrl}/groups`, requestOptions).then(handleResponse);
 }
 
-
 // Service function that retrieves an array of all groups from API backend
 function getAll() {
     const requestOptions = {
@@ -57,7 +56,7 @@ function update(group) {
         headers: { ...authHeader(), 'Content-Type': 'application/json' },
         body: JSON.stringify(group)
     };
-    return fetch(`${config.apiUrl}/groups/${group.id}`, requestOptions).then(handleResponse);
+    return fetch(`${config.apiUrl}/groups/${group.uuid}`, requestOptions).then(handleResponse);
 }
 
 

@@ -14,7 +14,13 @@ export class AdminGroupModal extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {modal: false, name: ''};
+        if (this.props.object) {
+            this.modalType = 'Modify';
+            this.state = {modal: false, name: this.props.object.name, uuid: this.props.object.uuid};
+        } else {
+            this.state = {modal: false, name: ''};
+            this.modalType = 'Create';
+        }
         this.toggle = this.toggle.bind(this);
         this.handleChangeName = this.handleChangeName.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -36,16 +42,20 @@ export class AdminGroupModal extends React.Component {
             "name": this.state.name,
         };
         this.toggle();
+        if (this.props.object) {
+            newGroup['uuid'] = this.state.uuid;
+            return this.props.dispatch(groupActions.modify(newGroup));
+        }
         return this.props.dispatch(groupActions.create(newGroup));
     }
 
     render() {
         return (
             <div>
-                <Button color="success" onClick={this.toggle}>Create Group</Button>
+                <Button color="success" onClick={this.toggle}>{ this.modalType } Group</Button>
                 <Modal isOpen={this.state.modal}>
                     <form onSubmit={this.handleSubmit}>
-                        <ModalHeader>Create Group</ModalHeader>
+                        <ModalHeader>{ this.modalType } Group</ModalHeader>
                         <ModalBody>
                             <div className="row">
                                 <div className="form-group col-md-4">

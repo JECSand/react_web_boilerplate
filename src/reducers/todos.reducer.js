@@ -5,7 +5,7 @@ React.js Web Client Boilerplate
 9/02/2019
 */
 
-import {todoConstants } from '../constants';
+import {todoConstants} from '../constants';
 
 // Export groups reducers
 export function todos(state = {}, action) {
@@ -14,6 +14,15 @@ export function todos(state = {}, action) {
             return {
                 ...state,
                 items: state.items.concat(action.todo)
+            };
+        case todoConstants.MODIFY_SUCCESS:
+            return {
+                ...state,
+                items: state.items.map(todo =>
+                    todo.uuid === action.todo.uuid
+                        ? { ...todo, name: action.todo.name, due: action.todo.due, description: action.todo.description }
+                        : todo
+                )
             };
         case todoConstants.GETALL_REQUEST:
             return {

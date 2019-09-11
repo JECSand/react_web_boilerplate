@@ -16,6 +16,7 @@ export const userActions = {
     register,
     getAll,
     create,
+    modify,
     delete: _delete
 };
 
@@ -84,6 +85,26 @@ function create(user) {
     function request(user) { return { type: userConstants.CREATE_REQUEST, user } }
     function success(user) { return { type: userConstants.CREATE_SUCCESS, user } }
     function failure(error) { return { type: userConstants.CREATE_FAILURE, error } }
+}
+
+function modify(user) {
+    return dispatch => {
+        dispatch(request(user));
+        userService.update(user)
+            .then(
+                user => {
+                    dispatch(success(user));
+                    dispatch(alertActions.success('User successfully modified'));
+                },
+                error => {
+                    dispatch(failure(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
+                }
+            );
+    };
+    function request(user) { return { type: userConstants.MODIFY_REQUEST, user } }
+    function success(user) { return { type: userConstants.MODIFY_SUCCESS, user } }
+    function failure(error) { return { type: userConstants.MODIFY_FAILURE, error } }
 }
 
 function getAll() {

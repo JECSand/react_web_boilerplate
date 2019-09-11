@@ -11,6 +11,7 @@ import { alertActions } from "./alert.actions";
 
 export const todoActions = {
     create,
+    modify,
     getAll,
     delete: _delete
 };
@@ -33,6 +34,26 @@ function create(todo) {
     function request(todo) { return { type: todoConstants.CREATE_REQUEST, todo } }
     function success(todo) { return { type: todoConstants.CREATE_SUCCESS, todo } }
     function failure(error) { return { type: todoConstants.CREATE_FAILURE, error } }
+}
+
+function modify(todo) {
+    return dispatch => {
+        dispatch(request(todo));
+        todoService.update(todo)
+            .then(
+                todo => {
+                    dispatch(success(todo));
+                    dispatch(alertActions.success('Todo successfully modified'));
+                },
+                error => {
+                    dispatch(failure(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
+                }
+            );
+    };
+    function request(todo) { return { type: todoConstants.MODIFY_REQUEST, todo } }
+    function success(todo) { return { type: todoConstants.MODIFY_SUCCESS, todo } }
+    function failure(error) { return { type: todoConstants.MODIFY_FAILURE, error } }
 }
 
 function getAll() {

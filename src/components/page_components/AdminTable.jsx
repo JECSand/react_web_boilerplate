@@ -45,18 +45,27 @@ export class AdminTable extends React.Component {
                                     : object.deleteError ? <span className="text-danger"> - ERROR: {object.deleteError}</span>
                                     : <span> - <a onClick={this.handleDelete(object.uuid)}>Delete</a></span>
                             }
+                            {(this.props.tableType === "users") &&
+                            <AdminUserModal role={ this.props.role } object={ object } dispatch={ this.props.dispatch } />
+                            }
+                            {(this.props.tableType === "groups") &&
+                            <AdminGroupModal dispatch={ this.props.dispatch  } object={ object } />
+                            }
+                            {(this.props.tableType === "todos") &&
+                            <AdminTodoModal dispatch={ this.props.dispatch } object={ object } />
+                            }
                         </li>
                     )}
                 </ul>
                 }
                 {(this.props.tableType === "users") &&
-                <AdminUserModal role={ this.props.role } dispatch={ this.props.dispatch } />
+                <AdminUserModal role={ this.props.role } object={ null } dispatch={ this.props.dispatch } />
                 }
                 {(this.props.tableType === "groups") &&
-                <AdminGroupModal dispatch={ this.props.dispatch } />
+                <AdminGroupModal dispatch={ this.props.dispatch } object={ null } />
                 }
                 {(this.props.tableType === "todos") &&
-                <AdminTodoModal dispatch={ this.props.dispatch } />
+                <AdminTodoModal dispatch={ this.props.dispatch } object={ null } />
                 }
             </div>
         );

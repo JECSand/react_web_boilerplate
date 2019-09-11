@@ -14,7 +14,13 @@ export class AdminTodoModal extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { modal: false, name: '', due: '' , description: ''};
+        if (this.props.object) {
+            this.modalType = 'Modify';
+            this.state = { modal: false, name: this.props.object.name, due: this.props.object.due, uuid: this.props.object.uuid, description: this.props.object.description};
+        } else {
+            this.state = { modal: false, name: '', due: '' , description: ''};
+            this.modalType = 'Create';
+        }
         this.toggle = this.toggle.bind(this);
         this.handleChangeName = this.handleChangeName.bind(this);
         this.handleChangeDue = this.handleChangeDue.bind(this);
@@ -46,16 +52,20 @@ export class AdminTodoModal extends React.Component {
             "description": this.state.description
         };
         this.toggle();
+        if (this.props.object) {
+            newTodo['uuid'] = this.state.uuid;
+            return this.props.dispatch(todoActions.modify(newTodo));
+        }
         return this.props.dispatch(todoActions.create(newTodo));
     }
 
     render() {
         return (
             <div>
-                <Button color="success" onClick={this.toggle}>Create Todo</Button>
+                <Button color="success" onClick={this.toggle}>{ this.modalType } Todo</Button>
                 <Modal isOpen={this.state.modal}>
                     <form onSubmit={this.handleSubmit}>
-                        <ModalHeader>Create Todo</ModalHeader>
+                        <ModalHeader>{ this.modalType } Todo</ModalHeader>
                         <ModalBody>
                             <div className="row">
                                 <div className="form-group col-md-4">
