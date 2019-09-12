@@ -23,7 +23,7 @@ function create(todo) {
             .then(
                 todo => {
                     dispatch(success(todo));
-                    dispatch(alertActions.success('Group successfully created'));
+                    dispatch(alertActions.success('Todo successfully created'));
                 },
                 error => {
                     dispatch(failure(error.toString()));

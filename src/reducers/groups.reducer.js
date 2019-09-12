@@ -13,7 +13,7 @@ export function groups(state = {}, action) {
         case groupConstants.CREATE_SUCCESS:
             return {
                 ...state,
-                items: state.items.concat(action.group)
+                items: state.items ? state.items.concat(action.group) : [action.group]
             };
         case groupConstants.MODIFY_SUCCESS:
             return {

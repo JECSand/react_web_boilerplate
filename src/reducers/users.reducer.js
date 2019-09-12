@@ -37,10 +37,14 @@ export function users(state = {}, action) {
       return {
         items: state.items.filter(user => user.uuid !== action.id)
       };
+    case userConstants.PASSWORD_FAILURE:
+      return {
+        error: action.error
+      };
     case userConstants.CREATE_SUCCESS:
       return {
         ...state,
-        items: state.items.concat(action.user)
+        items: state.items ? state.items.concat(action.user) : [action.user]
       };
     case userConstants.MODIFY_SUCCESS:
       return {
@@ -52,6 +56,14 @@ export function users(state = {}, action) {
                   action.user.groupuuid, role: action.user.groupuuid }
                 : user
         )
+      };
+    case userConstants.PROFILE_MODIFY_SUCCESS:
+      return {
+        user: action.user
+      };
+    case userConstants.MODIFY_FAILURE:
+      return {
+        error: action.error
       };
     case userConstants.DELETE_FAILURE:
       // Remove 'deleting:true' property and add 'deleteError:[error]' property to user

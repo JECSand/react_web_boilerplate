@@ -27,15 +27,30 @@ export function handleResponse(response) {
 }
 
 // Handler function for login requests
+export function handleAPIKeyResponse(response) {
+    return response.text().then(text => {
+        const data = text && JSON.parse(text);
+        if (!response.ok) {
+            if (response.status === 401) {
+                userService.logout();
+                location.reload(true);
+            }
+            const error = (data && data.message) || response.statusText;
+            return Promise.reject(error);
+        }
+        return JSON.stringify(response.headers.get('API-Key'));
+    });
+}
+
+// Handler function for login requests
 export function handleLogInResponse(response) {
     return response.text().then(text => {
         const data = text && JSON.parse(text);
         if (!response.ok) {
             if (response.status === 401) {
-                logout();
+                userService.logout();
                 location.reload(true);
             }
-
             const error = (data && data.message) || response.statusText;
             return Promise.reject(error);
         }
@@ -49,12 +64,12 @@ export function handleLogInResponse(response) {
 export function handleLogOutResponse(response) {
     return response.text().then(text => {
         const data = text && JSON.parse(text);
+        localStorage.removeItem('user');
+        localStorage.removeItem('auth');
         if (!response.ok) {
             const error = (data && data.message) || response.statusText;
             return Promise.reject(error);
         }
-        localStorage.removeItem('user');
-        localStorage.removeItem('auth');
         return data;
     });
 }

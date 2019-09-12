@@ -14,10 +14,10 @@ export class AdminGroupModal extends React.Component {
 
     constructor(props) {
         super(props);
-        if (this.props.object) {
+        if (this.props.dataObject) {
             this.modalType = 'Modify';
             this.btnColor = 'secondary';
-            this.state = {modal: false, name: this.props.object.name, uuid: this.props.object.uuid};
+            this.state = {modal: false, name: this.props.dataObject.name, uuid: this.props.dataObject.uuid};
         } else {
             this.state = {modal: false, name: ''};
             this.modalType = 'Create';
@@ -44,7 +44,7 @@ export class AdminGroupModal extends React.Component {
             "name": this.state.name,
         };
         this.toggle();
-        if (this.props.object) {
+        if (this.props.dataObject) {
             newGroup['uuid'] = this.state.uuid;
             return this.props.dispatch(groupActions.modify(newGroup));
         }

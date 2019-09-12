@@ -13,7 +13,7 @@ export function todos(state = {}, action) {
         case todoConstants.CREATE_SUCCESS:
             return {
                 ...state,
-                items: state.items.concat(action.todo)
+                items: state.items ? state.items.concat(action.todo) : [action.todo]
             };
         case todoConstants.MODIFY_SUCCESS:
             return {

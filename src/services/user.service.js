@@ -7,7 +7,7 @@ React.js Web Client Boilerplate
 
 import config from 'config';
 import { authHeader } from '../helpers';
-import { handleResponse, handleLogInResponse, handleLogOutResponse } from '../utility_functions';
+import { handleResponse, handleAPIKeyResponse, handleLogInResponse, handleLogOutResponse } from '../utility_functions';
 
 // Export Users Service Functions
 export const userService = {
@@ -18,7 +18,9 @@ export const userService = {
     getAll,
     getById,
     update,
-    delete: _delete
+    delete: _delete,
+    updatePassword,
+    generateAPIKey
 };
 
 // Service function that sends the API backend a post request logs a user in
@@ -102,4 +104,27 @@ function _delete(id) {
         headers: authHeader()
     };
     return fetch(`${config.apiUrl}/users/${id}`, requestOptions).then(handleResponse);
+}
+
+// Service function that updates a user's password
+function updatePassword(updateObject) {
+    const requestOptions = {
+        method: 'POST',
+        headers: { ...authHeader(), 'Content-Type': 'application/json' },
+        body: JSON.stringify(updateObject)
+    };
+    return fetch(`${config.apiUrl}/auth/password`, requestOptions).then(handleResponse);
+}
+
+// Service function that gets generates a 6 month API Key for a user
+function generateAPIKey() {
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader()
+    };
+    return fetch(`${config.apiUrl}/auth/api-key`, requestOptions)
+        .then(handleAPIKeyResponse)
+        .then(apiKey => {
+            return apiKey;
+        });
 }

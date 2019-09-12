@@ -10,3 +10,5 @@ export * from './HomePage';
 export * from './RegisterPage';
 export * from './AdminPage';
 export * from './TodosPage';
+export * from './UserProfilePage';
+export * from './GroupProfilePage';

@@ -17,7 +17,9 @@ export const userActions = {
     getAll,
     create,
     modify,
-    delete: _delete
+    delete: _delete,
+    updatePassword,
+    generateAPIKey
 };
 
 function login(username, password) {
@@ -93,8 +95,15 @@ function modify(user) {
         userService.update(user)
             .then(
                 user => {
-                    dispatch(success(user));
-                    dispatch(alertActions.success('User successfully modified'));
+                    let curUser = JSON.parse(localStorage.getItem('user'));
+                    if (curUser.uuid === user.uuid) {
+                        localStorage.setItem('user', JSON.stringify(user));
+                        dispatch(successProfile(user));
+                        dispatch(alertActions.success('Profile successfully modified'));
+                    } else {
+                        dispatch(success(user));
+                        dispatch(alertActions.success('User successfully modified'));
+                    }
                 },
                 error => {
                     dispatch(failure(error.toString()));
@@ -104,13 +113,13 @@ function modify(user) {
     };
     function request(user) { return { type: userConstants.MODIFY_REQUEST, user } }
     function success(user) { return { type: userConstants.MODIFY_SUCCESS, user } }
+    function successProfile(user) { return { type: userConstants.PROFILE_MODIFY_SUCCESS, user } }
     function failure(error) { return { type: userConstants.MODIFY_FAILURE, error } }
 }
 
 function getAll() {
     return dispatch => {
         dispatch(request());
-
         userService.getAll()
             .then(
                 users => dispatch(success(users)),
@@ -135,4 +144,38 @@ function _delete(id) {
     function request(id) { return { type: userConstants.DELETE_REQUEST, id } }
     function success(id) { return { type: userConstants.DELETE_SUCCESS, id } }
     function failure(id, error) { return { type: userConstants.DELETE_FAILURE, id, error } }
+}
+
+function updatePassword(updateObject) {
+    return dispatch => {
+        dispatch(request(updateObject));
+        userService.updatePassword(updateObject)
+            .then(
+                updateObject => {
+                    dispatch(success());
+                    dispatch(alertActions.success('Password update successful'));
+                },
+                error => {
+                    dispatch(failure(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
+                }
+            );
+    };
+    function request(updateObject) { return { type: userConstants.PASSWORD_REQUEST, updateObject } }
+    function success(updateObject) { return { type: userConstants.PASSWORD_SUCCESS, updateObject } }
+    function failure(error) { return { type: userConstants.PASSWORD_FAILURE, error } }
+}
+
+function generateAPIKey() {
+    return dispatch => {
+        dispatch(request());
+        userService.generateAPIKey()
+            .then(
+                apiKey => dispatch(success(apiKey)),
+                error => dispatch(failure(error.toString()))
+            );
+    };
+    function request() { return { type: userConstants.GET_APIKEY_REQUEST } }
+    function success(apiKey) { return { type: userConstants.GET_APIKEY_SUCCESS, apiKey } }
+    function failure(error) { return { type: userConstants.GET_APIKEY_FAILURE, error } }
 }

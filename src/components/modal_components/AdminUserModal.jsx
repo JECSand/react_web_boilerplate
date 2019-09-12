@@ -15,22 +15,22 @@ class AdminUserModal extends React.Component {
 
     constructor(props) {
         super(props);
-        if (this.props.object) {
+        if (this.props.dataObject) {
             this.modalType = 'Modify';
             this.btnColor = 'secondary';
-            this.state = {modal: false, username: this.props.object.username, password: '', uuid: this.props.object.uuid,
-                    firstname: this.props.object.firstname, lastname: this.props.object.lastname,
-                    email: this.props.object.email, groupuuid: this.props.object.groupuuid, role: this.props.object.role};
+            this.state = {modal: false, username: this.props.dataObject.username, password: '', uuid: this.props.dataObject.uuid,
+                    firstname: this.props.dataObject.firstname, lastname: this.props.dataObject.lastname,
+                    email: this.props.dataObject.email, groupuuid: this.props.dataObject.groupuuid, role: this.props.dataObject.role};
         } else {
             this.btnColor = 'primary';
             this.modalType = 'Create';
             this.state = { modal: false, email: '', username: '' , password: '',
                 firstname: '', lastname: '', groupuuid: '', role: 'member'};
         }
-
         this.roleData = [
             { value: 'member', name: 'Member' },
-            { value: 'group_admin', name: 'Admin' }
+            { value: 'group_admin', name: 'Admin' },
+            { value: 'master_admin', name: 'System Admin' }
         ];
         this.toggle = this.toggle.bind(this);
         this.handleChangeEmail = this.handleChangeEmail.bind(this);
@@ -83,11 +83,13 @@ class AdminUserModal extends React.Component {
             "role": this.state.role
         };
         this.toggle();
-        if (this.props.object) {
+        if (this.props.dataObject) {
             newUser['uuid'] = this.state.uuid;
             return this.props.dispatch(userActions.modify(newUser));
         }
-        return this.props.dispatch(userActions.create(newUser));
+        if (this.props.useContext === 'admin') {
+            return this.props.dispatch(userActions.create(newUser));
+        }
     }
 
     render() {
@@ -110,12 +112,15 @@ class AdminUserModal extends React.Component {
                                     <input type="text" value={this.state.username} onChange={this.handleChangeUsername} className="form-control" />
                                 </div>
                             </div>
+                            {(this.props.useContext === 'admin' && this.props.groups.items) &&
                             <div className="row">
                                 <div className="form-group col-md-4">
                                     <label>Password:</label>
-                                    <input type="password" value={this.state.password} onChange={this.handleChangePassword} className="form-control" />
+                                    <input type="password" value={this.state.password}
+                                           onChange={this.handleChangePassword} className="form-control"/>
                                 </div>
                             </div>
+                            }
                             <div className="row">
                                 <div className="form-group col-md-4">
                                     <label>First Name:</label>
@@ -128,7 +133,7 @@ class AdminUserModal extends React.Component {
                                     <input type="text" value={this.state.lastname} onChange={this.handleChangeLastname} className="form-control" />
                                 </div>
                             </div>
-                            {(this.props.role === 'master_admin' && this.props.groups.items) &&
+                            {(this.props.role === 'master_admin' && this.props.useContext === 'admin' && this.props.groups.items) &&
                             <div className="row">
                                 <div className="form-group col-md-4">
                                     <label>Select a User Group:</label>
@@ -140,16 +145,19 @@ class AdminUserModal extends React.Component {
                                 </div>
                             </div>
                             }
+                            {(this.props.useContext === 'admin' && this.props.groups.items) &&
                             <div className="row">
                                 <div className="form-group col-md-4">
                                     <label>Select User Role:</label>
-                                    <select name="role" value={this.state.role} onChange={this.handleChangeRole} className="form-control" >
+                                    <select name="role" value={this.state.role} onChange={this.handleChangeRole}
+                                            className="form-control">
                                         {this.roleData.map((e, key) => {
                                             return <option key={key} value={e.value}>{e.name}</option>;
                                         })}
                                     </select>
                                 </div>
                             </div>
+                            }
                         </ModalBody>
                         <ModalFooter>
                             <input type="submit" value="Submit" color="primary" className="btn btn-primary" />

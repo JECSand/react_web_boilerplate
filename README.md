@@ -55,3 +55,5 @@ $ sudo npm install
 ```
 $ npm start
 ```
+
+6. Open a web browser and go to http://0.0.0.0:8080 to view the App.

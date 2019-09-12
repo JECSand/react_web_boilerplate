@@ -14,12 +14,12 @@ export class AdminTodoModal extends React.Component {
 
     constructor(props) {
         super(props);
-        if (this.props.object) {
+        if (this.props.dataObject) {
             this.modalType = 'Modify';
             this.btnColor = 'secondary';
-            this.state = { modal: false, name: this.props.object.name, due: this.props.object.due, uuid: this.props.object.uuid, description: this.props.object.description};
+            this.state = { modal: false, name: this.props.dataObject.name, due: this.props.dataObject.due, uuid: this.props.dataObject.uuid, description: this.props.dataObject.description};
         } else {
-            this.state = { modal: false, name: '', due: '' , description: ''};
+            this.state = { modal: false, name: '', due: '' , description: '' };
             this.modalType = 'Create';
             this.btnColor = 'primary';
         }
@@ -54,7 +54,7 @@ export class AdminTodoModal extends React.Component {
             "description": this.state.description
         };
         this.toggle();
-        if (this.props.object) {
+        if (this.props.dataObject) {
             newTodo['uuid'] = this.state.uuid;
             return this.props.dispatch(todoActions.modify(newTodo));
         }
@@ -70,20 +70,20 @@ export class AdminTodoModal extends React.Component {
                         <ModalHeader>{ this.modalType } Todo</ModalHeader>
                         <ModalBody>
                             <div className="row">
-                                <div className="form-group col-md-4">
+                                <div className="form-group col-md-5">
                                     <label>Name:</label>
                                     <input type="text" value={this.state.name} onChange={this.handleChangeName} className="form-control" />
                                 </div>
                             </div>
                             <div className="row">
-                                <div className="form-group col-md-4">
-                                    <label>due:</label>
-                                    <input type="text" value={this.state.due} onChange={this.handleChangeDue} className="form-control" />
+                                <div className="form-group col-md-5">
+                                    <label>Due:</label>
+                                    <input type="date" value={this.state.due} onChange={this.handleChangeDue} className="form-control" />
                                 </div>
                             </div>
                             <div className="row">
-                                <div className="form-group col-md-4">
-                                    <label>description:</label>
+                                <div className="form-group col-md-5">
+                                    <label>Description:</label>
                                     <input type="text" value={this.state.description} onChange={this.handleChangeDescription} className="form-control" />
                                 </div>
                             </div>

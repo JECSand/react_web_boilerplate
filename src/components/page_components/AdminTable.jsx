@@ -19,6 +19,7 @@ export class AdminTable extends React.Component {
         super(props);
         this.toggle = this.toggle.bind(this);
         this.state = { collapse: false };
+        this.useContext = this.props.useContext ? this.props.useContext : 'member'
     }
 
     // Handler that dispatches a user delete action to the backend
@@ -56,33 +57,44 @@ export class AdminTable extends React.Component {
                         <li key={object.uuid}>
                             {object.uuid + ' - ' + object[objectName]}
                             <div>
-                            {(this.props.tableType === "users") &&
-                            <AdminUserModal role={ this.props.role } object={ object } dispatch={ this.props.dispatch } />
-                            }
-                            {(this.props.tableType === "groups") &&
-                            <AdminGroupModal dispatch={ this.props.dispatch  } object={ object } />
-                            }
-                            {(this.props.tableType === "todos") &&
-                            <AdminTodoModal dispatch={ this.props.dispatch } object={ object } />
-                            }
-                            {
-                                object.deleting ? <em> - Deleting...</em>
-                                    : object.deleteError ? <span className="text-danger"> - ERROR: {object.deleteError}</span>
-                                    : <Button color="danger" onClick={this.handleDelete(object.uuid)}>Delete</Button>
-                            }
+                                {(this.props.tableType === "users") &&
+                                <AdminUserModal role={this.props.role} dataObject={object} useContext={this.useContext}
+                                                dispatch={this.props.dispatch}/>
+                                }
+                                {(this.props.tableType === "groups") &&
+                                <AdminGroupModal dispatch={this.props.dispatch} dataObject={object}/>
+                                }
+                                {(this.props.tableType === "todos") &&
+                                <AdminTodoModal dispatch={this.props.dispatch} dataObject={object}/>
+                                }
+                                {
+                                    object.deleting ? <em> - Deleting...</em>
+                                        : object.deleteError ?
+                                        <span className="text-danger"> - ERROR: {object.deleteError}</span>
+                                        :
+                                        <Button color="danger" onClick={this.handleDelete(object.uuid)}>Delete</Button>
+                                }
                             </div>
+                            {(this.useContext === "member") &&
+                                <div>
+                                    {(this.props.tableType === "users") &&
+                                    <AdminUserModal role={this.props.role} dataObject={object} useContext={this.useContext}
+                                                    dispatch={this.props.dispatch}/>
+                                    }
+                                </div>
+                            }
                         </li>
                     )}
                 </ul>
                 }
-                {(this.props.tableType === "users") &&
-                <AdminUserModal role={ this.props.role } object={ null } dispatch={ this.props.dispatch } />
+                {(this.props.tableType === "users" && this.useContext === "admin") &&
+                <AdminUserModal role={ this.props.role } dataObject={ null } useContext={ this.useContext } dispatch={ this.props.dispatch } />
                 }
                 {(this.props.tableType === "groups") &&
-                <AdminGroupModal dispatch={ this.props.dispatch } object={ null } />
+                <AdminGroupModal dispatch={ this.props.dispatch } dataObject={ null } />
                 }
                 {(this.props.tableType === "todos") &&
-                <AdminTodoModal dispatch={ this.props.dispatch } object={ null } />
+                <AdminTodoModal dispatch={ this.props.dispatch } dataObject={ null } />
                 }
                 </CardBody>
                 </Card>

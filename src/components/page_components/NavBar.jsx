@@ -62,9 +62,11 @@ export class NavBar extends React.Component {
                                         { curUser.username }
                                     </DropdownToggle>
                                     <DropdownMenu right>
-                                        <DropdownItem href="/">Profile</DropdownItem>
-                                        <DropdownItem href="/">Group</DropdownItem>
-                                        <DropdownItem href="/">Account</DropdownItem>
+                                        <DropdownItem href="/user">User Profile</DropdownItem>
+                                        <DropdownItem href="/group">Group Profile</DropdownItem>
+                                        {(curUser.role === "master_admin" || curUser.role === "group_admin") &&
+                                        <DropdownItem href="/">Account Settings</DropdownItem>
+                                        }
                                         <DropdownItem divider />
                                         <DropdownItem href="/login">Logout</DropdownItem>
                                     </DropdownMenu>

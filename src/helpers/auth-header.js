@@ -7,10 +7,18 @@ React.js Web Client Boilerplate
 
 // Function that retrieves the JWT Auth-Token from localstorage and sets up the header format
 export function authHeader() {
-    let auth = JSON.parse(localStorage.getItem('auth'));
-    if (auth) {
-        return { 'Auth-Token': auth };
-    } else {
-        return {};
+    let authStr = localStorage.getItem('auth');
+    if (authStr !== null && authStr !== undefined) {
+        try {
+            let auth = JSON.parse(authStr);
+            if (auth) {
+                return { 'Auth-Token': auth };
+            }
+        } catch(e) {
+            localStorage.removeItem('user');
+            localStorage.removeItem('auth');
+            return {};
+        }
     }
+    return {};
 }

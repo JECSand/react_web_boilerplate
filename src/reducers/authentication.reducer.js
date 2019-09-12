@@ -28,6 +28,16 @@ export function authentication(state = initialState, action) {
       return {};
     case userConstants.LOGOUT:
       return {};
+    case userConstants.GET_APIKEY_SUCCESS:
+      return {
+        loggedIn: true,
+        user: user,
+        apiKey: action.apiKey
+      };
+    case userConstants.GET_APIKEY_FAILURE:
+      return {
+        error: action.error
+      };
     default:
       return state
   }
