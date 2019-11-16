@@ -5,8 +5,6 @@ React.js Web Client Boilerplate
 9/06/2019
 */
 
-
-import config from 'config';
 import {authHeader} from '../helpers';
 import {handleResponse} from '../utility_functions';
 
@@ -27,7 +25,7 @@ function create(todo) {
         headers: { ...authHeader(), 'Content-Type': 'application/json' },
         body: JSON.stringify(todo)
     };
-    return fetch(`${config.apiUrl}/todos`, requestOptions).then(handleResponse);
+    return fetch(`${process.env.REACT_APP_API_URL}/todos`, requestOptions).then(handleResponse);
 }
 
 // Service function that retrieves an array of all todos from API backend
@@ -36,7 +34,7 @@ function getAll() {
         method: 'GET',
         headers: authHeader()
     };
-    return fetch(`${config.apiUrl}/todos`, requestOptions).then(handleResponse);
+    return fetch(`${process.env.REACT_APP_API_URL}/todos`, requestOptions).then(handleResponse);
 }
 
 
@@ -46,7 +44,7 @@ function getById(id) {
         method: 'GET',
         headers: authHeader()
     };
-    return fetch(`${config.apiUrl}/todos/${id}`, requestOptions).then(handleResponse);
+    return fetch(`${process.env.REACT_APP_API_URL}/todos/${id}`, requestOptions).then(handleResponse);
 }
 
 
@@ -57,7 +55,7 @@ function update(todo) {
         headers: { ...authHeader(), 'Content-Type': 'application/json' },
         body: JSON.stringify(todo)
     };
-    return fetch(`${config.apiUrl}/todos/${todo.uuid}`, requestOptions).then(handleResponse);
+    return fetch(`${process.env.REACT_APP_API_URL}/todos/${todo.uuid}`, requestOptions).then(handleResponse);
 }
 
 
@@ -67,5 +65,5 @@ function _delete(id) {
         method: 'DELETE',
         headers: authHeader()
     };
-    return fetch(`${config.apiUrl}/todos/${id}`, requestOptions).then(handleResponse);
+    return fetch(`${process.env.REACT_APP_API_URL}/todos/${id}`, requestOptions).then(handleResponse);
 }

@@ -23,10 +23,9 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
-    const { dispatch } = this.props;
     history.listen((location, action) => {
       // clear alert on location change
-      dispatch(alertClear());
+      this.props.dispatch(alertClear());
     });
   }
 
@@ -65,7 +64,7 @@ const mapStateToProps = ({alert}) => {
 }
 
 const mapDispatchToProps = () => {
-
+  return {}
 }
 
 const connectedApp = connect(mapStateToProps, mapDispatchToProps)(App);

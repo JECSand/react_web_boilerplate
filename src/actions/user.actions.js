@@ -18,26 +18,18 @@ import {
 } from "./actionTypes";
 
 export const userActions = {
-    login,
-    logout,
-    register,
-    getAll,
-    create,
-    modify,
-    delete: _delete,
-    updatePassword,
-    generateAPIKey
+    login: (username, password) => ({ type: USERS_LOGIN_REQUEST, logInCreds: {username, password} }),
+    logout: () => ({ type: USERS_LOGOUT }),
+    register: userInfo => ({ type: USERS_REGISTER_REQUEST, userInfo }),
+    create: user => ({ type: USERS_CREATE_REQUEST, user }),
+    modify: user => ({ type: USERS_MODIFY_REQUEST, user }),
+    getAll: () => ({ type: USERS_GETALL_REQUEST }),
+    _delete: id => ({ type: USERS_DELETE_REQUEST, id }),
+    updatePassword: updateObject => ({ type: USERS_PASSWORD_REQUEST, updateObject }),
+    generateAPIKey: () => ({ type: USERS_GET_APIKEY_REQUEST }),
 };
 
-export const login = (username, password) => ({ type: USERS_LOGIN_REQUEST, logInCreds: {username, password} })
-export const logout = () => ({ type: USERS_LOGOUT })
-export const register = userInfo => ({ type: USERS_REGISTER_REQUEST, userInfo })
-export const create = user => ({ type: USERS_CREATE_REQUEST, user })
-export const modify = user => ({ type: USERS_MODIFY_REQUEST, user })
-export const getAll = () => ({ type: USERS_GETALL_REQUEST })
-export const _delete = id => ({ tyep: USERS_DELETE_REQUEST, id })
-export const updatePassword = updateObject => ({ type: USERS_PASSWORD_REQUEST, updateObject })
-export const generateAPIKey = () => ({ type: USERS_GET_APIKEY_REQUEST })
+
 
 
 // function _delete(id) {

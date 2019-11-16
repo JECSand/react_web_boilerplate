@@ -7,8 +7,7 @@ React.js Web Client Boilerplate
 
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import { userActions } from "../../actions";
-
+import {userActions} from "../../actions";
 
 export class UpdatePasswordModal extends React.Component {
 

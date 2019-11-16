@@ -8,7 +8,7 @@ React.js Web Client Boilerplate
 import React from 'react';
 import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import { userActions} from "../../actions";
+import {userActions} from "../../actions";
 
 
 class AdminUserModal extends React.Component {

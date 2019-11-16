@@ -5,8 +5,6 @@ React.js Web Client Boilerplate
 9/06/2019
 */
 
-
-import config from 'config';
 import {authHeader} from '../helpers';
 import {handleResponse} from '../utility_functions';
 
@@ -27,7 +25,7 @@ function create(group) {
         headers: { ...authHeader(), 'Content-Type': 'application/json' },
         body: JSON.stringify(group)
     };
-    return fetch(`${config.apiUrl}/groups`, requestOptions).then(handleResponse);
+    return fetch(`${process.env.REACT_APP_API_URL}/groups`, requestOptions).then(handleResponse);
 }
 
 // Service function that retrieves an array of all groups from API backend
@@ -36,7 +34,7 @@ function getAll() {
         method: 'GET',
         headers: authHeader()
     };
-    return fetch(`${config.apiUrl}/groups`, requestOptions).then(handleResponse);
+    return fetch(`${process.env.REACT_APP_API_URL}/groups`, requestOptions).then(handleResponse);
 }
 
 // Service function that gets a specific group by the user's uuid
@@ -45,7 +43,7 @@ function getById(id) {
         method: 'GET',
         headers: authHeader()
     };
-    return fetch(`${config.apiUrl}/groups/${id}`, requestOptions).then(handleResponse);
+    return fetch(`${process.env.REACT_APP_API_URL}/groups/${id}`, requestOptions).then(handleResponse);
 }
 
 
@@ -56,7 +54,7 @@ function update(group) {
         headers: { ...authHeader(), 'Content-Type': 'application/json' },
         body: JSON.stringify(group)
     };
-    return fetch(`${config.apiUrl}/groups/${group.uuid}`, requestOptions).then(handleResponse);
+    return fetch(`${process.env.REACT_APP_API_URL}/groups/${group.uuid}`, requestOptions).then(handleResponse);
 }
 
 
@@ -66,5 +64,5 @@ function _delete(id) {
         method: 'DELETE',
         headers: authHeader()
     };
-    return fetch(`${config.apiUrl}/groups/${id}`, requestOptions).then(handleResponse);
+    return fetch(`${process.env.REACT_APP_API_URL}/groups/${id}`, requestOptions).then(handleResponse);
 }

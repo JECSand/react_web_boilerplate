@@ -1,6 +1,5 @@
 import axios from 'axios';
 import getServerUrl from './helpers/urlResolver';
-import config from 'config';
 import {handleLogInResponse, handleLogOutResponse} from "./helpers/httpHelpers";
 import {authHeader} from "./helpers/auth-header";
 axios.defaults.baseURL = getServerUrl();
@@ -15,7 +14,7 @@ export function postData(urlPath, data) {
 }
 
 export function attemptLogin(logInCreds) {
-    return axios.post(`${config.apiUrl}/auth`, logInCreds)
+    return axios.post(`${process.env.REACT_APP_API_URL}/auth`, logInCreds)
         .then(handleLogInResponse)
         .then(user => {
             localStorage.setItem('user', JSON.stringify(user));
@@ -24,7 +23,7 @@ export function attemptLogin(logInCreds) {
 }
 
 export function attemptLogout() {
-    return axios.delete(`${config.apiUrl}/auth`, {headers: authHeader()})
+    return axios.delete(`${process.env.REACT_APP_API_URL}/auth`, {headers: authHeader()})
         .then(handleLogOutResponse)
 }
 
